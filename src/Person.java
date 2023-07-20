@@ -2,20 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-class Person {
-    private String name;
-    private char gender;
+class Pessoa {
+    private String nome;
+    private char sexo;
 
-    public Person(String name, char gender) {
-        this.name = name;
-        this.gender = gender;
+    public Pessoa(String nome, char sexo) {
+        this.nome = nome;
+        this.sexo = sexo;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+
+        return nome;
     }
 
-    public char getGender() {
-        return gender;
+    public char getSexo() {
+
+        return sexo;
     }
 }

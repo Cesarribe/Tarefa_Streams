@@ -5,10 +5,11 @@ import java.util.stream.Collectors;
 
 public class SepararPorSexo {
     public static void main(String[] args) {
-        List<Person> people = new ArrayList<>();
+        List<Pessoa> pessoa = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         int option = -1;
+
         while (option != 0) {
             System.out.println("\nEscolha uma opção:");
             System.out.println("1 - Adicionar pessoa");
@@ -17,19 +18,19 @@ public class SepararPorSexo {
             System.out.println("0 - Encerrar");
 
             option = scanner.nextInt();
-            scanner.nextLine(); // Consume the remaining new line
+            scanner.nextLine(); // para consumir uma linha
 
             switch (option) {
                 case 1:
-                    people.addAll(readPeopleFromConsole());
+                    pessoa.addAll(lerPessoaNoConsole());
                     break;
                 case 2:
-                    List<Person> males = filterPeopleByGender(people, 'M');
-                    printPeopleList(males, "Lista de homens:");
+                    List<Pessoa> homens = filtrarGenero(pessoa, 'M');
+                    imprimirList(homens, "Lista de homens:");
                     break;
                 case 3:
-                    List<Person> females = filterPeopleByGender(people, 'F');
-                    printPeopleList(females, "Lista de mulheres:");
+                    List<Pessoa> mulheres = filtrarGenero(pessoa, 'F');
+                    imprimirList(mulheres, "Lista de mulheres:");
                     break;
                 case 0:
                     System.out.println("Encerrando o programa.");
@@ -43,8 +44,8 @@ public class SepararPorSexo {
         scanner.close();
     }
 
-    private static List<Person> readPeopleFromConsole() {
-        List<Person> people = new ArrayList<>();
+    private static List<Pessoa> lerPessoaNoConsole() {
+        List<Pessoa> people = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         char continueAdding;
@@ -55,7 +56,7 @@ public class SepararPorSexo {
             System.out.println("Digite o sexo da pessoa (M/F):");
             char gender = scanner.nextLine().toUpperCase().charAt(0);
 
-            people.add(new Person(name, gender));
+            people.add(new Pessoa(name, gender));
 
             System.out.println("Deseja continuar adicionando pessoas? (S/N):");
             continueAdding = scanner.nextLine().toUpperCase().charAt(0);
@@ -64,14 +65,14 @@ public class SepararPorSexo {
         return people;
     }
 
-    private static List<Person> filterPeopleByGender(List<Person> people, char gender) {
-        return people.stream()
-                .filter(person -> person.getGender() == gender)
+    private static List<Pessoa> filtrarGenero(List<Pessoa> pessoa, char sexo) {
+        return pessoa.stream()
+                .filter(person -> person.getSexo() == sexo)
                 .collect(Collectors.toList());
     }
 
-    private static void printPeopleList(List<Person> people, String listTitle) {
-        System.out.println(listTitle);
-        people.forEach(person -> System.out.println(person.getName()));
+    private static void imprimirList(List<Pessoa> pessoa, String tituloLista) {
+        System.out.println(tituloLista);
+        pessoa.forEach(person -> System.out.println(person.getNome()));
     }
 }
